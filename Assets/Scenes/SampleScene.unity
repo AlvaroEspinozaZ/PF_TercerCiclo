@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -424,7 +424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143733178}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.08, y: 1, z: -11.383141}
+  m_LocalPosition: {x: -0.07999992, y: 1, z: -11.383141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -688,61 +688,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
   m_PrefabInstance: {fileID: 1936770481}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1675665310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675665309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27e0ac8705b914648a8e922767f21223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rgb: {fileID: 1675665314}
-  playa: {fileID: 1862770522}
-  velocityMovement: 1
-  velocityRotatio: 200
-  x: 0
-  y: 0
-  perseguir: 1
---- !u!114 &1675665311
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675665309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1ec95f2cd4adbb4aba00be230dc5a46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocityMovement: 5
-  velocityRotatio: 200
-  x: 0
-  y: 0
---- !u!95 &1675665312
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675665309}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1e734ee5988ae4a4ea3cbf98cf3c1f76, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!136 &1675665313
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -778,6 +723,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
   m_PrefabInstance: {fileID: 1936770481}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1675665316
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675665309}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 25e7440702b3996418f66f7d326ba8c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1675665317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675665309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6425cb8fd06d1540a51c41b9146aa04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAnimator: {fileID: 1675665316}
+--- !u!114 &1675665318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675665309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c4aaed1bd12ae419cedb8d40ee2940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAnimationBehaviour: {fileID: 1675665317}
+  movementSmoothingSpeed: 1
+  playerRigidbody: {fileID: 1675665314}
+  movementSpeed: 3
+  turnSpeed: 0.1
+  mainCamera: {fileID: 1143733181}
+  x: 0
+  y: 0
 --- !u!1 &1732588649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,6 +1084,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -2.673703
       objectReference: {fileID: 0}
+    - target: {fileID: -4667362398522730939, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -3746190272939815206, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -19.00447
@@ -1232,11 +1234,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1082271958561512970, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1330755669629619180, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1702,6 +1712,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
       propertyPath: m_Name
       value: Castle Guard 02
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
       propertyPath: m_TagString
