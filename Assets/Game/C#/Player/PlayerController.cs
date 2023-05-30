@@ -1,63 +1,104 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Sub Behaviours")]
     public PlayerBehaviourC playerAnimationBehaviour;
     [Header("Input Settings")]
-    //public PlayerInput playerInput;
-    public float movementSmoothingSpeed = 1f;
-    private Vector3 rawInputMovement;
-    private Vector3 smoothInputMovement;
-    [Header("Movement Settings")]
-    public Rigidbody playerRigidbody;
-    public float movementSpeed = 3f;
-    public float turnSpeed = 0.1f;
+    [SerializeField] public PlayerInput playerInput;
+    [Header("Movement Settings")]    
+    [SerializeField] Transform inFront;
+    [SerializeField] private Rigidbody playerRigidbody;
+    [SerializeField] public float movementSpeed = 3f;
+    [SerializeField] public float turnSpeed = 200f;
     [SerializeField] private Camera mainCamera;
-    private Vector3 movementDirection;
-    [SerializeField]private float x, y;
+    [SerializeField] private bool _canJump=true;
+    [Header("Raycast")]
+    [SerializeField] private LayerMask myLayers;
+    [SerializeField] private float distanceModifier = 0.3f;
 
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        x = Input.GetAxis("Horizontal");
-        y = Input.GetAxis("Vertical");
-        rawInputMovement = new Vector3(x,0,y);
-        playerRigidbody.velocity = rawInputMovement * movementSpeed;
-        playerAnimationBehaviour.UpdateMovementAnimation(playerRigidbody.velocity.magnitude);
-        //playerRigidbody.MoveRotation(45);
-    }
-    void FixedUpdate()
-    {      
-        TurnThePlayer();
-    }
-
-    void TurnThePlayer()
-    {
-        if (movementDirection.sqrMagnitude > 0.01f)
+        MakeRaycast();
+       if (!_canJump)
         {
-            //Quaternion rotation = Quaternion.Slerp(playerRigidbody.rotation,Quaternion.LookRotation(mainCamera.transform),turnSpeed);
-            //playerRigidbody.MoveRotation(rotation);
+            transform.position = new Vector3(transform.position.x, transform.position.y - Time.deltaTime*movementSpeed, transform.position.z);
         }
     }
-    /*
-    public void OnMovement(InputAction.CallbackContext value)
+    private void MakeRaycast()
     {
-        Vector2 inputMovement = value.ReadValue<Vector2>();
-        rawInputMovement = new Vector3(inputMovement.x, 0, inputMovement.y);
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, new Vector3(0, -1,0), out hit,distanceModifier, myLayers))
+        {
+            //Debug.Log(hit.transform.tag);
+            _canJump = true;
+        }
+        Debug.DrawRay(transform.position, new Vector2(0, - 1).normalized * distanceModifier, Color.red);
+
     }
-    public void OnAttack(InputAction.CallbackContext value)
+    private void MovePlayer()
+    {
+        Vector3 tmp = new Vector3(inFront.position.x - transform.position.x, transform.position.y, inFront.position.z - transform.position.z);
+       
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+    public void onTurnThePlayer(InputAction.CallbackContext value)
+    {
+        Vector3 inputMovement = value.ReadValue<Vector3>();
+        transform.Rotate(0, inputMovement.x *Time.deltaTime *turnSpeed, 0);
+    }
+    public void onMovementPlayer(InputAction.CallbackContext value)
+    {        
+            Vector3 tmp = new Vector3(inFront.position.x-transform.position.x, transform.position.y, inFront.position.z - transform.position.z); 
+            Vector3 inputMovement = new Vector3(transform.position.x, value.ReadValue<Vector3>().y, transform.position.z);
+            playerRigidbody.velocity = tmp * inputMovement.y * movementSpeed;
+            playerAnimationBehaviour.UpdateMovementAnimation(inputMovement.y);        
+    }
+    public void onJumpPlayer(InputAction.CallbackContext value)
+    {
+        if (_canJump)
+        {
+            if (value.started)
+            {
+                playerRigidbody.AddForce(Vector3.up * movementSpeed*2, ForceMode.Impulse);
+                playerAnimationBehaviour.PlayJumpAnimation();
+                _canJump = false;
+            }
+        }              
+    }
+    public void OnOpen(InputAction.CallbackContext value)
     {
         if (value.started)
         {
-            playerAnimationBehaviour.PlayAttackAnimation();
+            
         }
-    }*/
+    }
+    public void OnAttack1(InputAction.CallbackContext value)
+    {
+        if (value.started)
+        {
+            playerAnimationBehaviour.PlayAttackAnimation1();
+        }
+    }
+    public void OnAttack2(InputAction.CallbackContext value)
+    {
+        if (value.started)
+        {
+            playerAnimationBehaviour.PlayAttackAnimation2();
+        }
+    }
+    public void OnShootWea(InputAction.CallbackContext value)
+    {
+        if (value.started)
+        {
+            playerAnimationBehaviour.PlayShootAnimation();
+        }
+    }
 }
