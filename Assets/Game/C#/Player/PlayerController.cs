@@ -15,17 +15,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float turnSpeed = 200f;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private bool _canJump=true;
+    [SerializeField]  float _isRotate;
+    [SerializeField] float _isMovement;
     [Header("Raycast")]
     [SerializeField] private LayerMask myLayers;
-    [SerializeField] private float distanceModifier = 0.3f;
+    [SerializeField] private float distanceModifier = 0.03f;
 
     void Update()
     {
+        SiRota(_isRotate);
+        SiMueve(_isMovement);
         MakeRaycast();
        if (!_canJump)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y - Time.deltaTime*movementSpeed, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y - Time.deltaTime*2, transform.position.z);
         }
+        
     }
     private void MakeRaycast()
     {
@@ -51,15 +56,30 @@ public class PlayerController : MonoBehaviour
 
     public void onTurnThePlayer(InputAction.CallbackContext value)
     {
-        Vector3 inputMovement = value.ReadValue<Vector3>();
-        transform.Rotate(0, inputMovement.x *Time.deltaTime *turnSpeed, 0);
+
+        _isRotate = value.ReadValue<float>();
+        //transform.Rotate(0,  inputMovement * turnSpeed, 0);
+    }
+    public void SiRota(float _isRotate)
+    {
+        transform.Rotate(0, _isRotate * turnSpeed * Time.deltaTime, 0);
     }
     public void onMovementPlayer(InputAction.CallbackContext value)
-    {        
-            Vector3 tmp = new Vector3(inFront.position.x-transform.position.x, transform.position.y, inFront.position.z - transform.position.z); 
-            Vector3 inputMovement = new Vector3(transform.position.x, value.ReadValue<Vector3>().y, transform.position.z);
-            playerRigidbody.velocity = tmp * inputMovement.y * movementSpeed;
-            playerAnimationBehaviour.UpdateMovementAnimation(inputMovement.y);        
+    {
+        _isMovement = value.ReadValue<float>();            
+        //Vector3 tmp = new Vector3(inFront.position.x-transform.position.x, transform.position.y, inFront.position.z - transform.position.z);
+        //Vector3 inputMovement = new Vector3(transform.position.x, value.ReadValue<SnapAxis>(), transform.position.z);
+
+        //playerRigidbody.velocity = transform.position *inputMovement * movementSpeed;
+        //playerRigidbody.velocity = new Vector3(tmp.x, playerRigidbody.velocity.y, tmp.z) * inputMovement * movementSpeed;
+        //Debug.Log(playerRigidbody.velocity);
+        //playerAnimationBehaviour.UpdateMovementAnimation(inputMovement);        
+    }
+    public void SiMueve(float _isMovement)
+    {
+        Vector3 tmp = new Vector3(inFront.position.x - transform.position.x, 0, inFront.position.z - transform.position.z);
+        playerRigidbody.velocity = tmp * _isMovement *movementSpeed;
+        playerAnimationBehaviour.UpdateMovementAnimation(_isMovement);
     }
     public void onJumpPlayer(InputAction.CallbackContext value)
     {
@@ -67,8 +87,9 @@ public class PlayerController : MonoBehaviour
         {
             if (value.started)
             {
-                playerRigidbody.AddForce(Vector3.up * movementSpeed*2, ForceMode.Impulse);
                 playerAnimationBehaviour.PlayJumpAnimation();
+                playerRigidbody.AddForce(Vector3.up * movementSpeed * 20, ForceMode.Impulse);
+                
                 _canJump = false;
             }
         }              
