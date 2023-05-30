@@ -9,7 +9,7 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "7eff3165-9f90-458e-8c4c-044abd0b6c68",
-                    "expectedControlType": "Vector3",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -18,7 +18,7 @@
                     "name": "Rotate",
                     "type": "Value",
                     "id": "e5e3c0d9-04d3-4f1f-8416-fed500274fc3",
-                    "expectedControlType": "Vector3",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -53,9 +53,9 @@
             ],
             "bindings": [
                 {
-                    "name": "3D Vector",
-                    "id": "1751eb1f-74f4-4547-9447-98577c7210b6",
-                    "path": "3DVector",
+                    "name": "1D Axis",
+                    "id": "4af292c9-130a-4abf-b8dc-9a2be2b3bd96",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -64,9 +64,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "8e2786ae-4653-4f14-a41c-0b6727326778",
-                    "path": "<Keyboard>/w",
+                    "name": "negative",
+                    "id": "be1dbb72-74ec-4f66-8f88-30ef8e8dd9d0",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "New control scheme",
@@ -75,9 +75,9 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
-                    "id": "3e55950f-ef12-4e37-a9fc-e021034e0d68",
-                    "path": "<Keyboard>/s",
+                    "name": "positive",
+                    "id": "fdc813eb-f6d7-4cf1-b16b-24398bcbe50b",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "New control scheme",
@@ -119,9 +119,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "3D Vector",
-                    "id": "dfc0ea7a-591c-4b81-ace3-40b547b33c8e",
-                    "path": "3DVector",
+                    "name": "1D Axis",
+                    "id": "aa225923-fc5e-47e5-a82a-5fe945943a1f",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -130,8 +130,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "left",
-                    "id": "f1bb5827-f8c2-44d9-a064-2755b8762fe6",
+                    "name": "negative",
+                    "id": "b74fc0b4-82c4-4fbb-9934-517c83d64ecb",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -141,8 +141,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "cebc9eb6-b3c6-4414-8b5b-49808c24c4df",
+                    "name": "positive",
+                    "id": "1b3c9045-8a47-4ebc-aabd-76c4ba5b3be7",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
