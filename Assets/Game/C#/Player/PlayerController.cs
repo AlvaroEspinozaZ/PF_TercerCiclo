@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class PlayerController : MonoBehaviour
+public class PlayerController : Character
 {
     [Header("Sub Behaviours")]
     public PlayerBehaviourC playerAnimationBehaviour;
+    public PlayerWeapons _weaponsStack;
     [Header("Input Settings")]
     [SerializeField] public PlayerInput playerInput;
     [Header("Movement Settings")]    
@@ -14,23 +15,31 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float movementSpeed = 3f;
     [SerializeField] public float turnSpeed = 200f;
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private bool _canJump=true;
+    [SerializeField] private bool _canJump=false;
     [SerializeField]  float _isRotate;
     [SerializeField] float _isMovement;
     [Header("Raycast")]
     [SerializeField] private LayerMask myLayers;
     [SerializeField] private float distanceModifier = 0.03f;
-
+    private void OnEnable()
+    {
+       
+    }
     void Update()
     {
+        Gravity();
         SiRota(_isRotate);
         SiMueve(_isMovement);
         MakeRaycast();
-       if (!_canJump)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y - Time.deltaTime*2, transform.position.z);
-        }
+       
         
+    }
+    private void Gravity()
+    {
+        if (!_canJump)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - Time.deltaTime * 2, transform.position.z);
+        }
     }
     private void MakeRaycast()
     {
@@ -41,24 +50,11 @@ public class PlayerController : MonoBehaviour
             _canJump = true;
         }
         Debug.DrawRay(transform.position, new Vector2(0, - 1).normalized * distanceModifier, Color.red);
-
-    }
-    private void MovePlayer()
-    {
-        Vector3 tmp = new Vector3(inFront.position.x - transform.position.x, transform.position.y, inFront.position.z - transform.position.z);
-       
-    }
+    } 
     
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
     public void onTurnThePlayer(InputAction.CallbackContext value)
-    {
-
+    {        
         _isRotate = value.ReadValue<float>();
-        //transform.Rotate(0,  inputMovement * turnSpeed, 0);
     }
     public void SiRota(float _isRotate)
     {
@@ -66,14 +62,7 @@ public class PlayerController : MonoBehaviour
     }
     public void onMovementPlayer(InputAction.CallbackContext value)
     {
-        _isMovement = value.ReadValue<float>();            
-        //Vector3 tmp = new Vector3(inFront.position.x-transform.position.x, transform.position.y, inFront.position.z - transform.position.z);
-        //Vector3 inputMovement = new Vector3(transform.position.x, value.ReadValue<SnapAxis>(), transform.position.z);
-
-        //playerRigidbody.velocity = transform.position *inputMovement * movementSpeed;
-        //playerRigidbody.velocity = new Vector3(tmp.x, playerRigidbody.velocity.y, tmp.z) * inputMovement * movementSpeed;
-        //Debug.Log(playerRigidbody.velocity);
-        //playerAnimationBehaviour.UpdateMovementAnimation(inputMovement);        
+        _isMovement = value.ReadValue<float>();   
     }
     public void SiMueve(float _isMovement)
     {
@@ -88,8 +77,7 @@ public class PlayerController : MonoBehaviour
             if (value.started)
             {
                 playerAnimationBehaviour.PlayJumpAnimation();
-                playerRigidbody.AddForce(Vector3.up * movementSpeed * 20, ForceMode.Impulse);
-                
+                playerRigidbody.AddForce(Vector3.up * movementSpeed * 20, ForceMode.Impulse);                
                 _canJump = false;
             }
         }              
@@ -105,7 +93,7 @@ public class PlayerController : MonoBehaviour
     {
         if (value.started)
         {
-            playerAnimationBehaviour.PlayAttackAnimation1();
+            playerAnimationBehaviour.PlayAttackAnimation1();            
         }
     }
     public void OnAttack2(InputAction.CallbackContext value)
@@ -118,8 +106,16 @@ public class PlayerController : MonoBehaviour
     public void OnShootWea(InputAction.CallbackContext value)
     {
         if (value.started)
-        {
-            playerAnimationBehaviour.PlayShootAnimation();
+        {            
+            if (_weaponsStack._weaponsStack.Count>0)
+            {
+                playerAnimationBehaviour.PlayShootAnimation();
+                Debug.Log(_weaponsStack._weaponsStack.Top.value._name);
+                Weapons tmp = Instantiate(_weaponsStack._weaponsStack.Top.value, inFront.position, inFront.rotation);         
+                _weaponsStack._weaponsStack.Pop();
+                _weaponsStack._gameObjStack.Pop();
+            }
         }
     }
+   
 }
