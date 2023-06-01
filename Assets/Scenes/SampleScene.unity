@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 0
+  impulse: 0
   id: 0
   _name: 
   _active: 1
@@ -376,6 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 10
+  impulse: 0
   id: 0
   _name: La Fdlstfr
   _active: 0
@@ -957,6 +959,11 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!4 &1193550963 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5465940246521907071, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
+  m_PrefabInstance: {fileID: 1940876450}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1261384654
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 2
+  impulse: 10
   id: 0
   _name: Romper
   _active: 0
@@ -1072,7 +1080,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261384654}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3853629, y: -0.8204, z: 5.7167}
+  m_LocalPosition: {x: -13.62, y: -0.8204, z: 7.11}
   m_LocalScale: {x: 1, y: 1.1178, z: 0.5348}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1414,6 +1422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 10
+  impulse: 0
   id: 0
   _name: Ramen
   _active: 0
@@ -1801,7 +1810,7 @@ GameObject:
   - component: {fileID: 1732588651}
   m_Layer: 0
   m_Name: Weapon1
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2741,7 +2750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1330755669629619180, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2930,3 +2939,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: e8b9f796b474de64396f66e03d221bbe, type: 3}
   m_PrefabInstance: {fileID: 1940876450}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2052533244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052533245}
+  - component: {fileID: 2052533246}
+  - component: {fileID: 2052533247}
+  m_Layer: 0
+  m_Name: CapsuleColider
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2052533245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052533244}
+  m_LocalRotation: {x: 1.5603126e-14, y: -0.0000000045678634, z: 0.0000010120724, w: 1}
+  m_LocalPosition: {x: -0, y: -1, z: 0.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1193550963}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2052533246
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052533244}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.50214195
+  m_Height: 2.1745324
+  m_Direction: 1
+  m_Center: {x: -0.008465052, y: 1.0725174, z: -0.094534874}
+--- !u!114 &2052533247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052533244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b413472795e7ec94b919c4a304654910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rgb: {fileID: 1862770524}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapons : MonoBehaviour
 {
     [SerializeField] public float _damage;
+    [SerializeField] public float impulse;
     [SerializeField] public int id;
     [SerializeField] public string _name;
     [SerializeField] public bool _active = false;
@@ -38,7 +39,17 @@ public class Weapons : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             _active = true;
-        }        
+        }
+        if (other.gameObject.tag == "Enemy")
+        {
+            if (!_active)
+            {
+                Debug.Log("aver");
+                Vector3 tmp = new Vector3(other.transform.position.x - transform.position.x, other.transform.position.y, other.transform.position.z - transform.position.z);
+                other.GetComponent<EnemyReaction>().rgb.velocity = tmp * impulse;
+            }
+            
+        }
     }
     IEnumerator BeAWeaponOnGame()
     {
