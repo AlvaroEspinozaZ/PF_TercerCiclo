@@ -6,7 +6,7 @@ public class PlayerWeapons : MonoBehaviour
 {
     [SerializeField] public Weapons[] _arrayWeapons;
     [SerializeField] GameObject _handWeapon;
-    [SerializeField] Weapons _handWeaponStats;
+    [SerializeField] public Weapons _handWeaponStats;
     [SerializeField] int  _handWeaponStatsCounr;
     public MyStructs.Stack<Weapons> _weaponsStack;
     public MyStructs.Stack<GameObject> _gameObjStack;
@@ -21,7 +21,7 @@ public class PlayerWeapons : MonoBehaviour
         _handWeaponStatsCounr = _weaponsStack.Count;
         if (_weaponsStack.Count > 0)
         {
-            _handWeapon.GetComponent<MeshFilter>().mesh = _gameObjStack.Top.value.GetComponent<MeshFilter>().mesh;
+            _handWeapon.GetComponent<MeshFilter>().mesh = _weaponsStack.Top.value.GetComponent<MeshFilter>().mesh;
             _handWeaponStats = _weaponsStack.Top.value;
             _handWeapon.SetActive(true);
         }
@@ -33,11 +33,14 @@ public class PlayerWeapons : MonoBehaviour
  
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "1")        {
+        if (other.gameObject.tag == "1"){
+            //other.gameObject.tag = "Wea";
             _weaponsStack.Push(other.GetComponent<Weapons>());
             _gameObjStack.Push(other.GetComponent<Weapons>().SetGameObject());
             other.gameObject.transform.position=new Vector3(0,1000,0);
-            //other.gameObject.SetActive(false);
+            other.gameObject.SetActive(false);
+            //Destroy(other.gameObject);
+            _handWeaponStats._active = true;
             Debug.Log(_weaponsStack.Count + "-" + _gameObjStack.Count);
             Debug.Log(_weaponsStack.Top.value.name);            
         }        

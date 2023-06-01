@@ -9,7 +9,12 @@ public class PlayerController : Character
     public PlayerWeapons _weaponsStack;
     [Header("Input Settings")]
     [SerializeField] public PlayerInput playerInput;
-    [Header("Movement Settings")]    
+    [Header("Movement Settings")]
+    [SerializeField] private Quaternion qy = Quaternion.identity;
+    [SerializeField] private Quaternion r = Quaternion.identity;
+    [SerializeField] private float rot=0;
+    private float anguloSen;
+    private float anguloCos;
     [SerializeField] Transform inFront;
     [SerializeField] private Rigidbody playerRigidbody;
     [SerializeField] public float movementSpeed = 3f;
@@ -27,12 +32,13 @@ public class PlayerController : Character
     }
     void Update()
     {
-        Gravity();
-        SiRota(_isRotate);
+        Gravity();                
+        MakeRaycast();      
+    }
+    private void FixedUpdate()
+    {
         SiMueve(_isMovement);
-        MakeRaycast();
-       
-        
+        SiRota(_isRotate);
     }
     private void Gravity()
     {
@@ -49,6 +55,10 @@ public class PlayerController : Character
             //Debug.Log(hit.transform.tag);
             _canJump = true;
         }
+        else
+        {
+            _canJump = false;
+        }
         Debug.DrawRay(transform.position, new Vector2(0, - 1).normalized * distanceModifier, Color.red);
     } 
     
@@ -58,7 +68,13 @@ public class PlayerController : Character
     }
     public void SiRota(float _isRotate)
     {
-        transform.Rotate(0, _isRotate * turnSpeed * Time.deltaTime, 0);
+        rot += _isRotate * Time.deltaTime* turnSpeed;
+        anguloSen = Mathf.Sin(Mathf.Deg2Rad * rot * 0.5f);
+        anguloCos = Mathf.Cos(Mathf.Deg2Rad * rot * 0.5f);
+        qy.Set(0, anguloSen, 0, anguloCos);
+
+        r = qy ;
+        transform.rotation = r;
     }
     public void onMovementPlayer(InputAction.CallbackContext value)
     {
@@ -111,7 +127,11 @@ public class PlayerController : Character
             {
                 playerAnimationBehaviour.PlayShootAnimation();
                 Debug.Log(_weaponsStack._weaponsStack.Top.value._name);
-                Weapons tmp = Instantiate(_weaponsStack._weaponsStack.Top.value, inFront.position, inFront.rotation);         
+                Weapons tmp = Instantiate(_weaponsStack._weaponsStack.Top.value,inFront.position, transform.rotation);
+                tmp.gameObject.SetActive(true);
+                tmp.SetUpVelocity(inFront.position-transform.position, movementSpeed, _weaponsStack._weaponsStack.Top.value.tag);
+                tmp.Update();
+                tmp._active = false;
                 _weaponsStack._weaponsStack.Pop();
                 _weaponsStack._gameObjStack.Pop();
             }

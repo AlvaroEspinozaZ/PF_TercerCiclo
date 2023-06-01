@@ -5,6 +5,8 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     [SerializeField] PlayerWeapons _playerWeapons;
+    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
