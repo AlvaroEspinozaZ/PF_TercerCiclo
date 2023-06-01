@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 10
   impulse: 10
-  id: 0
+  id: 2
   _name: Ramen
   _active: 0
   _rgb: {fileID: 8434727622099404689}

@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 10
   impulse: 10
-  id: 0
+  id: 1
   _name: La Fdlstfr
   _active: 0
   _rgb: {fileID: 4747451831308452207}
