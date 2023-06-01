@@ -109,6 +109,7 @@ public class PlayerController : Character
     {
         if (value.started)
         {
+            
             playerAnimationBehaviour.PlayAttackAnimation1();            
         }
     }
@@ -130,7 +131,6 @@ public class PlayerController : Character
                 Weapons tmp = Instantiate(_weaponsStack._weaponsStack.Top.value,inFront.position, transform.rotation);
                 tmp.gameObject.SetActive(true);
                 tmp.SetUpVelocity(inFront.position-transform.position, movementSpeed, _weaponsStack._weaponsStack.Top.value.tag);
-                tmp.Update();
                 tmp._active = false;
                 _weaponsStack._weaponsStack.Pop();
                 _weaponsStack._gameObjStack.Pop();

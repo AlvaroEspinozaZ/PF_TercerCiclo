@@ -35,9 +35,11 @@ public class PlayerWeapons : MonoBehaviour
     {
         if (other.gameObject.tag == "1"){
             //other.gameObject.tag = "Wea";
-            _weaponsStack.Push(other.GetComponent<Weapons>());
-            _gameObjStack.Push(other.GetComponent<Weapons>().SetGameObject());
-            other.gameObject.transform.position=new Vector3(0,1000,0);
+            Weapons tmp = new Weapons();
+            tmp= other.GetComponent<Weapons>();
+            _weaponsStack.Push(tmp);
+            _gameObjStack.Push(tmp.SetGameObject());
+            //other.gameObject.transform.position=new Vector3(0,1000,0);
             other.gameObject.SetActive(false);
             //Destroy(other.gameObject);
             _handWeaponStats._active = true;
