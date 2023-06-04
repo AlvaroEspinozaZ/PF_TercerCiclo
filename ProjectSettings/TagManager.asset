@@ -8,6 +8,7 @@ TagManager:
   - Suelo
   - Enemy
   - Wea
+  - WeaEnemy
   layers:
   - Default
   - TransparentFX
