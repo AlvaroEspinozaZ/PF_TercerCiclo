@@ -11,6 +11,7 @@ public class PlayerController : Character
     public PlayerMovement _playerMovement;
     public WeaponController _weaponController;
     public HealthBarController _healthBarController;
+    public Abilities _abilities;
     [Header("Input Settings")]
     [SerializeField] public PlayerInput playerInput;   
     private float _isRotate;
@@ -55,24 +56,26 @@ public class PlayerController : Character
         }
     }
     public void OnAttack1(InputAction.CallbackContext value)
-    {
-        if (value.started)
+    {        
+        if (value.started && !_abilities.isCooldown1)
         {
-            
+            _abilities.doIt1 = value.started;
             playerAnimationBehaviour.PlayAttackAnimation1();            
         }
     }
     public void OnAttack2(InputAction.CallbackContext value)
     {
-        if (value.started)
+        if (value.started && !_abilities.isCooldown2)
         {
+            _abilities.doIt2 = value.started;
             playerAnimationBehaviour.PlayAttackAnimation2();
         }
     }
     public void OnShootWea(InputAction.CallbackContext value)
     {
-        if (value.started)
-        {            
+        if (value.started && !_abilities.isCooldown3)
+        {
+            _abilities.doIt3 = value.started;
             if (_weaponsStack._weaponsStack.Count>0)
             {
                 playerAnimationBehaviour.PlayShootAnimation();
