@@ -14,7 +14,6 @@ public class HealthBarController : MonoBehaviour
     private float _fullWidth;
     private float TargetWidth => currentValue * _fullWidth / maxValue;
     private Coroutine updateHealthBarCoroutine;
-    //2 eventos, cuando te golpean(solo baja vida) y cuando mueres(currentValue en 0)
     public event Action onDeath;
 
     private void Start()

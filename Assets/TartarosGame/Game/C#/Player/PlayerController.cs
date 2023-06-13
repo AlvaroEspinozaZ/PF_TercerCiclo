@@ -56,11 +56,12 @@ public class PlayerController : Character
         }
     }
     public void OnAttack1(InputAction.CallbackContext value)
-    {        
+    {
         if (value.started && !_abilities.isCooldown1)
         {
             _abilities.doIt1 = value.started;
-            playerAnimationBehaviour.PlayAttackAnimation1();            
+            playerAnimationBehaviour.PlayAttackAnimation1();
+            _playerMovement.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
     public void OnAttack2(InputAction.CallbackContext value)
@@ -69,6 +70,7 @@ public class PlayerController : Character
         {
             _abilities.doIt2 = value.started;
             playerAnimationBehaviour.PlayAttackAnimation2();
+            _playerMovement.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
     public void OnShootWea(InputAction.CallbackContext value)
@@ -82,7 +84,8 @@ public class PlayerController : Character
                 Debug.Log(_weaponsStack._weaponsStack.Top.value._name);
                 Weapons tmp = Instantiate(_weaponsStack._weaponsStack.Top.value,_playerMovement.inFront.position, transform.rotation);
                 tmp.gameObject.SetActive(true);
-                tmp.SetUpVelocity(_playerMovement.inFront.position-transform.position, _playerMovement.movementSpeed, _weaponsStack._weaponsStack.Top.value.tag);
+                Vector3 shoot = new Vector3(_playerMovement.inFront.position.x - transform.position.x, (_playerMovement.inFront.position.y - transform.position.y)/2, _playerMovement.inFront.position.z - transform.position.z);
+                tmp.SetUpVelocity(shoot, _playerMovement.movementSpeed*2, _weaponsStack._weaponsStack.Top.value.tag);
                 tmp._active = false;
                 _weaponsStack._weaponsStack.Pop();
                 _weaponsStack._gameObjStack.Pop();

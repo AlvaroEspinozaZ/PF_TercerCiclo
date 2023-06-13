@@ -13,22 +13,28 @@ public class EnemyReaction : Character
     {
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log("Arrr");
-            onHitToPlayer?.Invoke(_atacar);
-            _atacar = true;
+            rgb.AddForce(Vector3.up,ForceMode.Impulse);
         }
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Arrr");
-            onHitToPlayer?.Invoke(_atacar);
-            _atacar = true;
+            StartCoroutine(AttackOn());
         }
     }
     private void OnTriggerExit(Collider other)
     {
+        _atacar = false;
+    }
+
+
+    IEnumerator AttackOn()
+    {
+        Debug.Log("Arrr");
+        onHitToPlayer?.Invoke(_atacar);
+        _atacar = true;
+        yield return new WaitForSecondsRealtime(0.55f);
         _atacar = false;
     }
 }

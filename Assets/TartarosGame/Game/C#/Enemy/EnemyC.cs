@@ -11,6 +11,7 @@ public class EnemyC : MonoBehaviour
     public EnemyWea _enemyWea;
     public EnemyMovement _enemyMovement;
     public HealthBarController _healthBarController;
+    public GameObject Weapon1;
 
     void Start()
     {       
@@ -31,8 +32,11 @@ public class EnemyC : MonoBehaviour
         if (atack)
         {
             Debug.Log("xqno ataco");
-            _playerAnimationBehaviour.PlayEnemyAttackAnimation();
+            _playerAnimationBehaviour.PlayEnemyAttackAnimation(); 
+            StartCoroutine(WeaponOn());
+            StartCoroutine(WeaponOf());
         }
+        
     }
     public void SiRota(Transform other)
     {
@@ -61,5 +65,16 @@ public class EnemyC : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
+    }
+    IEnumerator WeaponOf()
+    {
+        yield return new WaitForSecondsRealtime(0.6f);
+        Weapon1.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    IEnumerator WeaponOn()
+    {
+        yield return new WaitForSecondsRealtime(0.55f);
+        Weapon1.GetComponent<BoxCollider>().enabled = true;
     }
 }

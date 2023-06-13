@@ -77,4 +77,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Escalera")
+        {
+            Vector3 tmp = new Vector3(0, inFront.position.y - transform.position.y, 0);
+            playerRigidbody.velocity = tmp * _isMovement * movementSpeed;
+        }
+    }*/
 }
