@@ -113,15 +113,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 10
   impulse: 10
+  impulse2: 250
   id: 1
   _name: La Fdlstfr
   _active: 0
   _rgb: {fileID: 4747451831308452207}
-  myLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  distanceModifier: 0.5
-  _canJump: 0
 --- !u!54 &4747451831308452207
 Rigidbody:
   m_ObjectHideFlags: 0
