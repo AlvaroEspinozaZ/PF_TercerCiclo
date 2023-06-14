@@ -16,6 +16,7 @@ public class PlayerController : Character
     [SerializeField] public PlayerInput playerInput;   
     private float _isRotate;
     private float _isMovement;
+    [SerializeField] private bool _isdash=false;
     private void Start()
     {
        
@@ -26,8 +27,10 @@ public class PlayerController : Character
     }
     private void FixedUpdate()
     {
+       
         _playerMovement.SiMueve(_isMovement);
         _playerMovement.SiRota(_isRotate);
+        _playerMovement.SiDash(_isdash);
     }
     public void UpdateLife(float damage)
     {
@@ -54,6 +57,14 @@ public class PlayerController : Character
         {
             
         }
+    }
+    public void OnDash(InputAction.CallbackContext value)
+    {
+        if (value.started && !_abilities.isCooldown4)
+        {
+            _abilities.doIt4 = value.started;
+            StartCoroutine(DuracionDash());
+         }
     }
     public void OnAttack1(InputAction.CallbackContext value)
     {
@@ -92,5 +103,10 @@ public class PlayerController : Character
             }
         }
     }
-   
+    IEnumerator DuracionDash()
+    {
+        _isdash = true;
+        yield return new WaitForSecondsRealtime(0.4f);
+        _isdash = false;
+    }   
 }

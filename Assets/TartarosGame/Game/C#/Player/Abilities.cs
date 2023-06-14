@@ -5,26 +5,32 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 public class Abilities : MonoBehaviour
 {
-    [Header("Ability1")]
+    [Header("AbilityAttack1")]
     public Image abilityImage1;
     public float cooldown1 = 1.5f;
     public bool isCooldown1 = false;
     public bool doIt1 = false;
-    [Header("Ability2")]
+    [Header("AbilityAttack2")]
     public Image abilityImage2;
     public float cooldown2 = 1;
     public bool isCooldown2 = false;
     public bool doIt2 = false;
-    [Header("Ability2")]
+    [Header("Ability2ShootWeapon")]
     public Image abilityImage3;
     public float cooldown3 = 5;
     public bool isCooldown3 = false;
     public bool doIt3 = false;
+    [Header("AbilityDash")]
+    public Image abilityImage4;
+    public float cooldown4 = 5;
+    public bool isCooldown4 = false;
+    public bool doIt4 = false;
     void Start()
     {
         abilityImage1.fillAmount = 0;
         abilityImage2.fillAmount = 0;
         abilityImage3.fillAmount = 0;
+        abilityImage4.fillAmount = 0;
     }
 
     // Update is called once per frame
@@ -33,6 +39,7 @@ public class Abilities : MonoBehaviour
         Ability1(doIt1);
         Ability2(doIt2);
         Ability3(doIt3);
+        Ability4(doIt4);
     }
     public void Ability1(bool itDidIt)
     {
@@ -89,6 +96,25 @@ public class Abilities : MonoBehaviour
 
                 abilityImage3.fillAmount = 0;
                 isCooldown3 = false;
+            }
+        }
+    }
+    public void Ability4(bool itDidIt)
+    {
+        if (itDidIt && isCooldown4 == false)
+        {
+            isCooldown4 = true;
+            doIt4 = false;
+            abilityImage4.fillAmount = 1;
+        }
+        if (isCooldown4)
+        {
+            abilityImage4.fillAmount -= 1 / cooldown4 * Time.deltaTime;
+            if (abilityImage4.fillAmount <= 0)
+            {
+
+                abilityImage4.fillAmount = 0;
+                isCooldown4 = false;
             }
         }
     }

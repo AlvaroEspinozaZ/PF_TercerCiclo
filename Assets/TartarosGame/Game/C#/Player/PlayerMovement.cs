@@ -65,6 +65,16 @@ public class PlayerMovement : MonoBehaviour
         Vector3 tmp = new Vector3((inFront.position.x - transform.position.x) * _isMovement * movementSpeed, transform.position.y, (inFront.position.z - transform.position.z) * _isMovement * movementSpeed);
         playerRigidbody.velocity = tmp ;
     }
+    public void SiDash(bool isdash)
+    {
+        if (isdash)
+        {
+        Vector3 tmp = new Vector3((inFront.position.x - transform.position.x) *  movementSpeed*8, transform.position.y, (inFront.position.z - transform.position.z) *  movementSpeed*8);
+        playerRigidbody.velocity = tmp;
+        }
+        else { }
+        
+    }
     public void _Jump(InputAction.CallbackContext value, PlayerBehaviourC playerAnimationBehaviour)
     {
         if (_canJump)
