@@ -62,8 +62,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void SiMueve(float _isMovement)
     {
-        Vector3 tmp = new Vector3(inFront.position.x - transform.position.x, 0, inFront.position.z - transform.position.z);
-        playerRigidbody.velocity = tmp * _isMovement * movementSpeed;
+        Vector3 tmp = new Vector3((inFront.position.x - transform.position.x) * _isMovement * movementSpeed, transform.position.y, (inFront.position.z - transform.position.z) * _isMovement * movementSpeed);
+        playerRigidbody.velocity = tmp ;
     }
     public void _Jump(InputAction.CallbackContext value, PlayerBehaviourC playerAnimationBehaviour)
     {
